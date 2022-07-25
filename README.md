@@ -153,10 +153,13 @@ mumFles <- list.files()
 
 # Initialize internal object for Mummichog 
 mSet<-InitDataObjects("mass_all", "mummichog", FALSE)
+
 # Set the internal structure of mass-list. Set "rmp" if retention time, m/z value and intensity are presented.
 mSet<-SetPeakFormat(mSet, "rmp")
+
 # Set the mode of obtainin mass-spectrum, mass tolerance and resolution
-mSet<-UpdateInstrumentParameters(mSet, 10.0, "positive", "yes", 0.02);
+mSet<-UpdateInstrumentParameters(mSet, 10.0, "positive", "yes", 0.02)
+
 # Set the adduct list
 add.vec <- c("M [1+]","M+H [1+]","M+2H [2+]","M+3H [3+]","M+Na [1+]","M+H+Na [2+]","M+K [1+]")
 
@@ -182,3 +185,5 @@ for (i in 1:length(mumFles)){
               "hsa_kegg.qs", "pos_adduct.qs")
 }
 ```
+
+
