@@ -106,7 +106,7 @@ my_peaks <- detectPeaks(align_spec, method="MAD", halfWindowSize=4, SNR=1)
 # Make peak bins (all aligned peaks will have the same m/z values)
 my_peaks <- binPeaks(my_peaks, method="strict", tolerance=0.001)
 ```
-my_peaks is the R list with all processed mass spectra. Each element of the list is the processed consensus mass spectrum from the sample.
+**my_peaks** is the R list with all processed mass spectra. Each element of the list is the processed consensus mass spectrum from the sample.
 
 <p>More information about MALDIquant and MALDIquantForeign on developer's GitHub: https://strimmerlab.github.io/software/maldiquant/</p>
 
@@ -137,4 +137,48 @@ For further processing steps you have to export your peak lists into files (e. g
   </tr>
 </table>
 
+<p>Make sure that the number of received files for Mummichog is equal to the original number of raw files.</p>
 
+## Annotation with Mummichog
+
+To perform peak annotation with Mummichog for all files you may use next code (Code is far from perfect, so, you can optimize it):
+
+```R
+library("MetaboAnalystR")
+
+# set working directory with peak lists in csv format
+pth <- "/your/directory/with/peak lists/"
+setwd(pth)
+mumFles <- list.files()
+
+# Initialize internal object for Mummichog 
+mSet<-InitDataObjects("mass_all", "mummichog", FALSE)
+# Set the internal structure of mass-list. Set "rmp" if retention time, m/z value and intensity are presented.
+mSet<-SetPeakFormat(mSet, "rmp")
+# Set the mode of obtainin mass-spectrum, mass tolerance and resolution
+mSet<-UpdateInstrumentParameters(mSet, 10.0, "positive", "yes", 0.02);
+# Set the adduct list
+add.vec <- c("M [1+]","M+H [1+]","M+2H [2+]","M+3H [3+]","M+Na [1+]","M+H+Na [2+]","M+K [1+]")
+
+dir.create("/your/results")
+setwd("/your/results")
+
+# Get putative annotations for m/z values
+for (i in 1:length(mumFles)){
+  mSet <- Read.PeakListData(mSet, paste0(pth,mumFles[i]))
+  mSet<-SanityCheckMummichogData(mSet)
+  mSet<-Setup.AdductData(mSet, add.vec)
+  mSet<-PerformAdductMapping(mSet, "positive")
+  mSet<-SetPeakEnrichMethod(mSet, "mum", "v2")
+  mSet<-SetMummichogPval(mSet, 0.99)
+  mSet<-PerformPSEA(mSet, "hsa_kegg", "current", 3 , 100)
+  
+  file.rename("mummichog_matched_compound_all.csv", 
+              paste0(smplNms[i], ".csv"))
+  
+  
+  file.remove("mum_raw.qs", "mum_res.qs",
+              "mummichog_pathway_enrichment.csv", "mummichog_query.json",
+              "hsa_kegg.qs", "pos_adduct.qs")
+}
+```
