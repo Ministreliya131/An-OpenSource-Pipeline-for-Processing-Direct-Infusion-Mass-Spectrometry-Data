@@ -113,7 +113,7 @@ my_peaks <- binPeaks(my_peaks, method="strict", tolerance=0.001)
 
 ## Export the peak lists with artifical p-value for Mummichog annotation
 
-For further processing steps you have to export your peak lists into files (e. g.):
+For further processing steps you have to export your peak lists into <b>csv</b> or <b>tsv</b> files (e. g.):
 
 <table>
   <tr>
@@ -142,7 +142,9 @@ For further processing steps you have to export your peak lists into files (e. g
 
 ## Annotation with Mummichog
 
-To perform peak annotation with Mummichog for all files you may use next code (Code is far from perfect, so, you can optimize it):
+<p>Mummichog is a part of the MetaboAnalyst software. On the web-site you can use it from "Functional Analysis": https://dev.metaboanalyst.ca/MetaboAnalyst/upload/PeakUploadView.xhtml</p>
+<p>Mummichog is also implemented into MetaboAnalystR.</p>
+<p>To perform peak annotation with Mummichog for all files you may use next code (Code is far from perfect, so, you can optimize it):</p>
 
 ```R
 library("MetaboAnalystR")
