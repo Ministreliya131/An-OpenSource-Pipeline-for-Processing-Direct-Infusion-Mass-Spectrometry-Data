@@ -13,6 +13,29 @@
 The entire pipeline was built on the publicly available R language packages most commonly used to process, analyze and visualize mass spectrometry data (MSnbase, MALDIquant and MetaboAnalyst). 
 Bioinformaticians can now reanalyze the direct infusion mass spectra (DIMS) without access to commercial software.
 
+## Requirements
+
+Make sure that your R version >= 4.0.
+<p>MSnbase can be installed via Bioconductor:</p>
+
+```R
+BiocManager::install("MSnbase")
+```
+
+<p>MALDIquant and MALDIquantForeign can be installed with next code:</p>
+
+```R
+install.packages(c("MALDIquant", "MALDIquantForeign"))
+```
+
+<p>Detailed instructions for installing MetaboAnalystR are on the developer's page: https://github.com/xia-lab/MetaboAnalystR</p>
+<p>If you are a Linux user, then make sure you have the following packages:</p>
+<p><span>&#8226;</span> libxml2-dev</p>
+<p><span>&#8226;</span> libnetcdf-dev</p>
+<p><span>&#8226;</span> libmagick++-dev</p>
+<p><span>&#8226;</span> libcurl4-openssl-dev</p>
+<p><span>&#8226;</span> libssl-dev</p>
+
 ## Input format
 
 Before processing your data should be converted into mzML or mzXML with MSconvert (a part of ProteoWizard, can be downloaded here: https://proteowizard.sourceforge.io/download.html )
@@ -83,3 +106,35 @@ my_peaks <- detectPeaks(align_spec, method="MAD", halfWindowSize=4, SNR=1)
 # Make peak bins (all aligned peaks will have the same m/z values)
 my_peaks <- binPeaks(my_peaks, method="strict", tolerance=0.001)
 ```
+my_peaks is the R list with all processed mass spectra. Each element of the list is the processed consensus mass spectrum from the sample.
+
+<p>More information about MALDIquant and MALDIquantForeign on developer's GitHub: https://strimmerlab.github.io/software/maldiquant/</p>
+
+## Export the peak lists with artifical p-value for Mummichog annotation
+
+For further processing steps you have to export your peak lists into files (e. g.):
+
+<table>
+  <tr>
+    <th>"m.z"</th>
+    <th>"p.value"</th>
+  </tr>
+  <tr>
+    <td>86.15466</td>
+    <td>0.99</td>
+  </tr>
+  <tr>
+    <td>87.12934</td>
+    <td>0.99</td>
+  </tr>
+  <tr>
+    <td>88.23249</td>
+    <td>0.99</td>
+  </tr>
+  <tr>
+    <td>...</td>
+    <td>...</td>
+  </tr>
+</table>
+
+
