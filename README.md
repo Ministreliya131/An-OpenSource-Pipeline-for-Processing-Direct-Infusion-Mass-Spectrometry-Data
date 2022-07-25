@@ -186,4 +186,41 @@ for (i in 1:length(mumFles)){
 }
 ```
 
+<p>After annotation you recieve the next table in originally named file "mummichog_matched_compound_all.csv":</p>
 
+<table>
+  <tr>
+    <th>Query.Mass</th>
+    <th>Matched.Compound</th>
+	<th>Matched.Form</th>
+	<th>Mass.Diff</th>
+  </tr>
+  <tr>
+    <td>415.26049</td>
+	<td>C03990</td>
+	<td>M+K[1+]</td>
+    <td>1.35332300033042e-05</td>
+  </tr>
+  <tr>
+    <td>589.08137</td>
+	<td>C00325</td>
+	<td>M[1+]</td>
+    <td>0.000829999999950815</td>
+  </tr>
+  <tr>
+    <td>304.2994</td>
+	<td>C11695</td>
+	<td>M-CO2+H[1+]</td>
+    <td>0.00047646677001012</td>
+  </tr>
+  <tr>
+    <td>...</td>
+    <td>...</td>
+	<td>...</td>
+	<td>...</td>
+  </tr>
+</table>
+
+<p>The "Matched.Compound" column contains annotated metabolites' KeGG IDs</p>
+
+<p>For Pathway Analiys and Metabolite Set Enrichment Analisys (MSEA) you need to extract "Matched.Compound" column and go to the MetaboAnalyst web-site: https://www.metaboanalyst.ca/</p>
