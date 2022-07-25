@@ -49,6 +49,37 @@ stopCluster(myCluster)
 
 ## Processing consensus spectra with MALDIquant
 
-MALDIquant was originally developed for processing MALDI mass spectra. There is some superficial similarity between the MALDI spectrum and DIMS as shown in the figure below. Thus, the MALDIquant can be used to process direct input mass spectra with a standard pipeline for MALDI data.
+MALDIquant was originally developed for processing MALDI mass spectra. There is some superficial similarity between the MALDI spectrum and DIMS as shown in the figure below. Thus, the MALDIquant can be used to process direct infusion mass spectra with a standard pipeline for MALDI data.
 
+<img src="./p2.png" width="80%">
 
+<p>The standard processing mass spectrometry data with MALDIquant package:</p>
+
+```R
+
+library("MALDIquantForeign")
+library("MALDIquant")
+
+# Import your consensus spectra with parallel (the function from MALDIquantForeign package)
+mzml <- importMzMl("/your/directory/consensus/spectra", centroided=FALSE, mc.cores=4,
+                     verbose=FALSE)
+
+# Set the method to transform intensities
+t_spec <- transformIntensity(mzml, method="sqrt")
+
+# Smoothing intensities with Savitzky-Golay method
+smooth_spec <- smoothIntensity(t_spec, method="SavitzkyGolay", halfWindowSize=4)
+
+# Set the method for baseline correction and number of iterations
+bsln_off_spec <- removeBaseline(smooth_spec, method="SNIP", iterations=80)
+
+# Make the spectra alignment
+align_spec <- alignSpectra(bsln_off_spec, halfWindowSize=2, noiseMethod="MAD", SNR=1,
+                         tolerance=0.001, warpingMethod="lowess")
+
+# Detect peaks with noise filtering method "median absolute deviation"
+my_peaks <- detectPeaks(align_spec, method="MAD", halfWindowSize=4, SNR=1)
+
+# Make peak bins (all aligned peaks will have the same m/z values)
+my_peaks <- binPeaks(my_peaks, method="strict", tolerance=0.001)
+```
