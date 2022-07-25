@@ -10,8 +10,9 @@
 
 ## Description
 
-The entire pipeline was built on the publicly available R language packages most commonly used to process, analyze and visualize mass spectrometry data (MSnbase, MALDIquant and MetaboAnalyst). 
-Bioinformaticians can now reanalyze the direct infusion mass spectra (DIMS) without access to commercial software.
+<p>The entire pipeline was built on the publicly available R language packages most commonly used to process, analyze and visualize mass spectrometry data (MSnbase, MALDIquant and MetaboAnalyst).</p>
+<p>Bioinformaticians can now reanalyze the direct infusion mass spectra (DIMS) without access to commercial software.</p>
+<p>The description of the pipeline and the results obtained from the dataset of 100 blood plasma samples are presented in the article <b>"An Open-Source Pipeline for Processing Direct Infusion Mass Spectrometry Data of the Human Plasma Metabolome"</b>: ...</p>
 
 ## Requirements
 
@@ -223,4 +224,6 @@ for (i in 1:length(mumFles)){
 
 <p>The "Matched.Compound" column contains annotated metabolites' KeGG IDs</p>
 
-<p>For Pathway Analiys and Metabolite Set Enrichment Analisys (MSEA) you need to extract "Matched.Compound" column and go to the MetaboAnalyst web-site: https://www.metaboanalyst.ca/</p>
+<p>For <b>Pathway Analiys</b> and <b>Metabolite Set Enrichment Analisys (MSEA)</b> you need to extract "Matched.Compound" column and go to the MetaboAnalyst web-site.</p>
+<p><b>Pathway Analysis</b>: https://www.metaboanalyst.ca/MetaboAnalyst/upload/PathUploadView.xhtml</p>
+<p><b>MSEA</b>: https://www.metaboanalyst.ca/MetaboAnalyst/upload/EnrichUploadView.xhtml</p>
