@@ -12,7 +12,7 @@
 
 <p>The entire pipeline was built on the publicly available R language packages most commonly used to process, analyze and visualize mass spectrometry data (MSnbase, MALDIquant and MetaboAnalyst).</p>
 <p>Bioinformaticians can now reanalyze the direct infusion mass spectra (DIMS) without access to commercial software.</p>
-<p>The description of the pipeline and the results obtained from the dataset of 100 blood plasma samples are presented in the article <b>"An Open-Source Pipeline for Processing Direct Infusion Mass Spectrometry Data of the Human Plasma Metabolome"</b>: ...</p>
+<p>The description of the pipeline and the results obtained from the dataset of 100 blood plasma samples are presented in the article <b>"An Open-Source Pipeline for Processing Direct Infusion Mass Spectrometry Data of the Human Plasma Metabolome"</b>: https://doi.org/10.3390/metabo12080768</p>
 
 ## Requirements
 
